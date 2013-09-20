@@ -1,0 +1,178 @@
+/* ==============================================================
+   Typography
+   ============================================================== */
+
+body {
+  font-family: 'Gotham SSm A', 'Gotham SSm B', $helvetica;
+  color: $dark-gray; 
+}
+
+@mixin display-type { 
+  font-family: 'Gotham SSm A', 'Gotham SSm B', $helvetica;
+}
+
+
+/* ==============================================================
+   Modular Scale (Major Third: 18px @ 1:1.25)
+   ============================================================== */
+$xlarge-heading:   55px; // h1 alternate-a
+$large-heading:    44px; // h1
+$medium-heading:   35px; // h1 alternate-b
+$small-heading:    28px; // h2
+$large-body-text:  22px; // h3
+$body-text:        18px; // h4, p
+$small-body-text:  14px; // h5, h6
+$label-text:       12px; // small
+
+// Off scale
+$navigation-text:  16px; // 
+
+
+/* ==============================================================
+   Global Type Usages
+   ============================================================== */
+
+h1 {
+  @include adjust-font-size-to($large-heading, 9);
+  @include groom(4, $large-heading, 300, $zen-black);
+  @include display-type;
+}
+
+h2 {
+  @include adjust-font-size-to($small-heading, 6);
+  @include groom(2, $small-heading, 500, $zen-black);   
+}
+
+h3 {
+  @include adjust-font-size-to($large-body-text, 5);
+  @include groom(2, $large-body-text, 500, $zen-black);   
+}
+
+h4 {
+  @include adjust-font-size-to($body-text, 4);
+  @include groom(2, $body-text, 500, $zen-black); 
+}
+
+h5 {
+  @include adjust-font-size-to($small-body-text, 3.5);
+  @include groom(2, $body-text, 500, $zen-black);
+  text-transform: uppercase;    
+}
+
+h6 {
+  @include adjust-font-size-to($small-body-text, 3.5);
+  @include groom(2, $body-text, 400, $zen-black);
+  text-transform: uppercase;   
+}
+
+p, ul, ol {
+  @include adjust-font-size-to($body-text, 5);
+  @include groom(4, $body-text, 300);   
+}
+
+li {
+  @include groom(1, $body-text);
+  margin-left: $slug/2;     
+  // for nested lists
+  ul li {
+    margin-top: rhythm(1, $body-text) ;
+    margin-bottom: rhythm(1, $body-text) ;
+  } 
+}
+
+figcaption {
+  @include adjust-font-size-to($small-body-text, 3);
+  @include groom(4, $small-body-text, 400, $medium-gray); 
+}
+
+
+/* Specific Type Styles
+   ============================================================== */
+
+.logotype {
+  display: inline-block;
+  @include adjust-font-size-to($body-text, 4);
+  @include groom(0, $body-text, 600, $white); 
+  top: -0.125em;    
+}
+
+.display-text {
+  @include adjust-font-size-to($xlarge-heading, 9);
+  @include groom(4, $xlarge-heading, 500, $zen-green);
+  @include display-type;
+}
+
+.page-title {
+  display: inline-block;
+  @include slug(1,0);
+  padding-bottom: $slug / 2;
+  border-bottom: 7px solid $zen-blue-light;
+}
+
+
+/* Sub Navigation
+   ============================================================== */
+
+.subnavigation {
+  ul {
+    list-style: none;
+    margin: 0; 
+  }
+  li {
+    margin: 0;
+  }
+  ul li li {
+    margin-left: $slug /2;  
+  }
+  a {
+    @include adjust-font-size-to(16px);
+    display: block; 
+    padding: 1em 0;
+    border-top: 1px dotted $zen-blue-light;    
+  }
+  .level-1 {
+    font-weight: 500;
+  }
+}
+
+
+/* Symbolset Icons
+   ============================================================== */
+
+.ss-icon {
+  font-size: 8px;
+  position: relative;
+  margin-left: $slug / 8;
+}
+
+a > .ss-icon {
+  color: $zen-green;
+}
+
+a > .ss-social-circle {
+  @include adjust-font-size-to($small-heading, 6.5);
+  color: $zen-green;
+  position: relative;
+  margin-left: 0; // important
+  margin-right: $slug / 8;
+}
+a > .ss-social-circle:hover {
+  color: $zen-green;
+}
+
+
+/* Links
+   ============================================================== */
+
+a:link,
+a:visited {
+  color: $zen-green;
+  text-decoration: none;
+}
+
+a:hover,
+a:active {
+  @include trans;
+  color: $zen-blue;
+}
+

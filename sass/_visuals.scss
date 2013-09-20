@@ -1,0 +1,31 @@
+/* =============================================================================
+   Global Button Styles
+   ========================================================================== */
+
+/* Button - sets common button styles
+   ============================================================== */
+
+.btn {
+	display: inline-block;
+  @include adjust-font-size-to($small-body-text, 1);
+	font-weight: 600;
+	padding: 17px 12px 16px;		
+	text-align: center;
+	text-decoration: none;	
+}
+.btn:link,
+.btn:visited {
+	border: 1px solid $zen-green;
+	border-radius: $rounded;
+	color: $zen-black;
+}
+.btn:hover,
+.btn:active {
+	border: 1px solid $zen-green;
+	color: #fff;
+	background-color: $zen-green;
+}
+
+.inline {
+	margin-bottom: $slug / 2;
+}

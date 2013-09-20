@@ -1,0 +1,76 @@
+/* ==============================================================
+   Functions
+   ============================================================== */
+
+/* Convert pixels values to em values */
+@function calc-em($target-px, $context) {
+  @return ($target-px / $context) * 1em;
+}
+
+
+/* ==============================================================
+   Typography mixins
+   ============================================================== */
+
+/* Spec vertical rhythm, weight & color in one line
+/* Usage: @include groom(4, 34px, 400, $neutral-text); */
+@mixin groom ($base-line-unit-after, $font-size, $font-weight: auto, $color: auto) {
+  margin: 0 auto rhythm($base-line-unit-after, $font-size);
+  font-weight: $font-weight;
+  color: $color;   
+}
+
+
+/* ==============================================================
+   Positioning mixins
+   ============================================================== */
+
+/*
+// For consistent vertical spacing above and below objects
+// Convert the $base-line-height to em
+$base-line-height-em: calc-em($base-line-height, 16px);
+// Set the value of 1 slug unit
+$slug: $base-line-height-em * 8; 
+*/
+
+// For consistent vertical spacing above and below objects
+// Set the value of 1 slug unit
+$slug: $base-line-height * 8; 
+
+// Usage: @include slug(0, 1);
+@mixin slug ($top-slug-count: 0, $bottom-slug-count: 0) {
+	margin-top: ($slug * $top-slug-count);
+	margin-bottom: ($slug * $bottom-slug-count);
+}
+
+// Center items that do not belong to the grid
+@mixin centered {
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+// Place on parent div to vertically center children
+@mixin flexbox-vertical-center {
+	width: 100%; // Firefox needs this  
+  height: 100%; // Height can be anything
+      
+  // WebKit (Chrome & Safari)
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  
+  // Firefox
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  
+  // IE 
+  display: -ms-box;
+  -ms-box-pack: center;
+  -ms-box-align: center;
+  
+  // Native CSS
+  display: box;
+  box-pack: center;
+  box-align: center;
+}

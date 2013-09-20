@@ -1,0 +1,663 @@
+/**
+ * @file
+ * SMACSS Modules
+ *
+ * Adds modular sets of styles.
+ *
+ * Additional useful selectors can be found in Zen's online documentation.
+ * http://drupal.org/node/1707736
+ */
+
+/* =============================================================================
+   Accessibility features
+   ========================================================================== */
+
+/* element-invisible as defined by http://snook.ca/archives/html_and_css/hiding-content-for-accessibility */
+.element-invisible,
+%element-invisible {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+    clip: rect(1px 1px 1px 1px); // IE6 and IE7 use the wrong syntax.
+  }
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+
+%element-invisible-off { /* Turns off the element-invisible effect. */
+  position: static !important;
+  clip: auto;
+  height: auto;
+  width: auto;
+  overflow: auto;
+}
+
+.element-focusable,
+%element-focusable {
+  @extend %element-invisible;
+
+  &:active,
+  &:focus {
+    @extend %element-invisible-off;
+  }
+}
+
+body {
+  color: $drk-gray;
+  background-color: #fff;
+}
+
+p {
+  @include adjust-leading-to(1.25);
+}
+
+img {
+  vertical-align: bottom;
+}
+/* =============================================================================
+   Containers
+   ========================================================================== */
+.container {
+  @include breakpoint(max-width 720px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.secondary {
+  background-color: $lt-gray;
+  border-bottom: 1px solid $line-gray;
+}
+
+.secondary .label {
+  border-top: 1px solid $line-gray;
+  color: rgba($md-gray, .66);
+  margin-top: 48px;
+}
+
+.secondary.ad {
+  @include breakpoint(max-width 840px) {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   lead-in area above the navbar
+   ========================================================================== */
+
+.lead-in {
+  margin-bottom: 6px;
+  color: $blue;
+  @include breakpoint(max-width 840px) {
+    margin-top: 6px;
+  }
+
+    .lead-in__description {
+      float: left;
+      margin: 0;
+      font-weight: 500;
+      font-style: italic;
+      @include breakpoint(max-width 560px) {
+        display: none;
+      }
+    }
+
+    .lead-in__credit {
+      float: right;
+      margin: 0;
+      @include breakpoint(max-width 560px) {
+        float: left;
+      }
+    }
+
+    #name-and-slogan {
+      @extend %element-invisible;
+    }
+}
+
+/* =============================================================================
+   Header module
+   ========================================================================== */
+
+.header {
+  box-sizing: border-box;
+  position: static;
+  background-color: $orange;
+  height: 72px;
+  padding: 24px 0;
+  width: 100%;
+  z-index: 100;
+  @include breakpoint(max-width 480px) {
+    height: 48px;
+    padding: 12px 0;
+  }
+}
+
+.navbar__logo {
+  float: left;
+  display: inline-block;
+  height: 24px;
+  width: 113px;
+  background: url("../imgs/logo-pri.png") no-repeat;
+  @include breakpoint(max-width 480px) {
+    width: 64px;
+    background-position: -52px 0;
+  }
+}
+
+.links--social {
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+  top: 4px;
+  left: 8px;
+  @include breakpoint(max-width 1000px) {
+    display: none;
+  }
+}
+
+.links--social a:link,
+.links--social a:visited {
+  color: rgba($white, .8);
+}
+.links--social a:hover,
+.links--social a:active {
+  color: rgba($white, 1);
+}
+
+.links--social__link {
+  float: left;
+  margin: 0 4px;
+}
+
+.navbar__items--right {
+  float: right;
+}
+
+.links--utility__link {
+  float: left;
+  margin: 0 12px;
+  position: relative;
+  bottom: 6px;
+  @include breakpoint(max-width 890px) {
+    margin: 0 5px;
+  }
+  @include breakpoint(max-width 420px) {
+    margin: 0 2px;
+  }
+}
+
+.links--utility__link .ss-icon {
+  font-size: 22px;
+  margin-right: 6px;
+  position: relative;
+  top: 6px;
+}
+
+.links--utility {
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+  top: 4px;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: .1em;
+}
+
+.links--utility a:link,
+.links--utility a:visited {
+  color: rgba($white, .8);
+}
+.links--utility a:hover,
+.links--utility a:active {
+  color: rgba($white, 1);
+}
+
+.links--utility__follow {
+  @include breakpoint(1000px) {
+    display: none;
+  }
+}
+
+.help-text {
+  @include breakpoint(max-width 890px) {
+    display: none;
+  }
+}
+/* =============================================================================
+   News items sections
+   ========================================================================== */
+
+.grid-news-item {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.featured-story .grid-news-item__title {
+  margin: 20px 0;
+}
+
+.divider {
+  height: 1px;
+  background-color: $line-gray;
+  margin: 48px 0 24px 0;
+}
+
+*[class$="news-item__group-1"] {
+  position: relative;
+}
+
+*[class$="news-item__group-2"] {
+  position: relative;
+}
+
+*[class$="news-item__taxonomy"] {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+*[class$="news-item__image"] {
+  width: 100%;
+}
+
+*[class$="news-item__comments"] {
+  position: absolute;
+  top: 18px;
+  right: -15px;
+  background-color: $orange;
+  height: 30px;
+  width: 30px;
+  color: $white;
+  font-size: 13px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0;
+  -webkit-border-radius: 15px; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+  -moz-border-radius: 15px;   /* Firefox 1-3.6 */
+  border-radius: 15px;   /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+}
+
+.featured-story .grid-news-item__comments {
+  right: 8px;
+}
+
+.featured-story .grid-news-item__title {
+  @include breakpoint(max-width 480px){
+    font-size: 36px;
+  }
+  @include breakpoint(max-width 320px){
+    font-size: 28px;
+  }
+}
+
+*[class$="news-item__title"] {
+  margin: 6px 0;
+  @include breakpoint(max-width 480px){
+    font-size: 28px;
+  }
+  @include breakpoint(max-width 320px){
+    font-size: 22px;
+  }
+}
+
+*[class$="news-item__meta"] {
+  margin: 12px 0 0 0;
+}
+
+*[class$="news-item__blurb"] {
+  color: $md-gray;
+  margin-bottom: 0;
+}
+
+.meta-date {
+  font-weight: 500;
+  color: $md-gray;
+  border-left: 1px solid $md-gray;
+  margin-left: 9px;
+  padding-left: 9px;
+}
+
+/* sections-news */
+.sections-news {
+  margin-top: 24px;
+  @include breakpoint(max-width 539px) {
+    display: none;
+  }
+}
+
+.sections-news-item {
+  @include breakpoint(max-width 1279px) {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.sections-news-item__image {
+  @include breakpoint($lg) {
+    float: left;
+    width: 33%;
+    margin-right: 24px;
+  }
+  @include breakpoint(max-width 1100px) {
+    display: none;
+  }
+}
+
+/* flex-news */
+.flex-news {
+  text-align: center;
+  margin-top: 24px;
+  @include breakpoint(540px) {
+    display: none;
+  }
+}
+
+.flex-news-item__taxonomy {
+  font-size: 20px;
+}
+
+.flex-news-item__title {
+  font-size: 18px;
+}
+
+.flex-nav-holder {
+  display: block;
+  width: 216px;
+  margin: 0 auto;
+}
+
+.flex-control-nav {
+  display: block;
+  list-style-type: none;
+
+}
+
+.flex-control-nav li a {
+  display: block;
+  float: left;
+  width: 24px;
+  height: 24px;
+  -webkit-border-radius: 16px; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+  -moz-border-radius: 16px;   /* Firefox 1-3.6 */
+  border-radius: 16px;   /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+  background-color: darken($lt-gray, 3%);
+  margin: 6px;
+}
+.flex-control-nav li a:hover {
+  background-color: rgba($blue, .66) !important;
+}
+.flex-active {
+  background-color: rgba($blue, .66) !important;
+}
+
+/* latest-news */
+.latest-news {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.latest-news-item__group-1 {
+  width: 216px;
+  margin-left: 24px;
+  margin-top: 8px;
+  float: right;
+  @include breakpoint(max-width 600px){
+    display: none;
+  }
+}
+
+.latest-news-item__title {
+  @include breakpoint(max-width 800px){
+    font-size: 1.33em;
+  }
+  @include breakpoint(max-width 420px){
+    font-size: 1em;
+  }
+}
+
+.latest-news-item__comments {
+  top: -15px;
+  right: -15px;
+}
+/* =============================================================================
+   Features
+   ========================================================================== */
+
+/* =============================================================================
+   Signature
+   ========================================================================== */
+.secondary.different {
+  border-bottom: none;
+}
+
+.different-voice {
+  height: 96px;
+  background: url("../imgs/different-voice.png") no-repeat;
+  background-position: 50% 50%;
+  @include breakpoint(max-width 600px) {
+    background-size: 80%;
+  }
+}
+
+.sponsors {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.sponsors h6 {
+  font-weight: 500;
+  color: $md-gray;
+  margin: 0;
+}
+
+.sponsors__image-1-gray {
+  background: url("../imgs/logo-medtronic.jpg") no-repeat;
+  background-position: 50% 50%;
+  margin: 12px 0;
+}
+.sponsors__image-1 {
+  opacity: 0;
+  @include trans
+}
+.sponsors__image-1:hover {
+  opacity: 1;
+}
+
+.sponsors__image-2-gray {
+  background: url("../imgs/logo-gates.jpg") no-repeat;
+  background-position: 50% 50%;
+  margin: 12px 0;
+}
+.sponsors__image-2 {
+  opacity: 0;
+  @include trans
+}
+.sponsors__image-2:hover {
+  opacity: 1;
+}
+
+
+/* =============================================================================
+   Footer
+   ========================================================================== */
+.secondary.footer {
+  background: #ececec;
+}
+
+footer {
+  text-align: center;
+  font-size: 13px;
+  color: $md-gray;
+}
+
+.footer-link {
+  padding: 0 6px;
+}
+
+/* =============================================================================
+   Button module
+   ========================================================================== */
+
+.button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: $blue;
+  color: $white !important;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  line-height: 60px;
+  -webkit-border-radius: 30px; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+  -moz-border-radius: 30px;   /* Firefox 1-3.6 */
+  border-radius: 30px;   /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+  font-weight: 700;
+}
+.button:hover,
+.button:active {
+  background: $orange;
+}
+
+
+/* =============================================================================
+   General modules (Small modules that dont fit under other sections)
+   ========================================================================== */
+
+/* A inline link that is try to draw more attention to itself.
+.inline--call-to-action*/
+
+/* Description text at top */
+.powered-by {
+  float: left;
+  padding-right: 6px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.icon-globe:before {
+  content: "";
+  display: block;
+  float: left;
+  position: relative;
+  top: 3px;
+  height: 17px;
+  width: 20px;
+  background: url(../imgs/icon-globe.png) no-repeat;
+}
+
+/* 728x90 ad unit */
+.ad-728x90 {
+  display: table;
+  width: 728px;
+  height: 90px;
+  background-color: #aaa;
+  color: #fff;
+  text-align: center;
+  margin: 24px auto;
+  @include breakpoint(max-width 840px) {
+    display: none;
+  }
+}
+
+.ad-728x90 p {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+// New 320 Ad styles
+.wrapper-1 {
+  background-color: $lt-blue;
+  margin-top: 24px;
+  padding: 24px;
+}
+
+.ad-320-wrapper {
+  text-align: center;
+}
+
+.ad-320-wrapper:before {
+  content: "advertisement";
+  display: block;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  color: $blue;
+  margin-bottom: 12px;
+}
+
+/* Old 320 Ad styles, commented out by Mesker
+  .ad-320 {
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .wrapper-1 {
+    padding-left: 50%;
+    background-color: $lt-blue;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-top: 24px;
+  }
+
+  .ad-320-wrapper {
+    display: table;
+    position: relative;
+    left: -50%;
+  }
+
+  .ad-320__img {
+    display: table-cell;
+    vertical-align: middle;
+    width: 320px;
+  }
+*/
+
+
+
+
+/* =============================================================================
+   Links module
+   ========================================================================== */
+a:link,
+a:visited {
+  color: $blue;
+  text-decoration: none;
+  @include trans;
+}
+a:hover,
+a:active {
+  color: $orange;
+}
+
+*[class$="news-item__title"] a:link,
+*[class$="news-item__title"] a:visited {
+  color: $drk-gray;
+}
+*[class$="news-item__title"] a:hover,
+*[class$="news-item__title"] a:active {
+  color: $orange;
+}
+
+footer a:link,
+footer a:visited {
+  color: $md-gray;
+}
+footer a:hover,
+footer a:active {
+  color: $orange;
+}
+
+/* =============================================================================
+   List module
+   ========================================================================== */
+
+
+/* =============================================================================
+   Nav module - displays multiple levels of links, main navigation module
+   ========================================================================== */
+
+
